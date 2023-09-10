@@ -1,0 +1,128 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Bozz Scriptz Hub <'w'>👑", "Ocean")
+
+-- MAIN
+local MainTAB = Window:NewTab("Main")
+local MainSECTION = MainTAB:NewSection("CREDITS")
+MainSECTION:NewLabel("Sanjeesh - owner/gui deisgn/scripts and buttons")
+local UpdatesSECTION = MainTAB:NewSection("UPDATES")
+UpdatesSECTION:NewLabel(" Update: (1.0.0) 3/01/2023 created exploit")
+UpdatesSECTION:NewLabel("Update: (1.0.2 ) Added superhuman infinite yield sit, walkspeed changer, Complete new design!")
+
+MainSECTION:NewKeybind("Keybind = f", "When you press that letter it closes the UI", Enum.KeyCode.F, function()
+    Library:ToggleUI()
+end)
+
+-- HUMANOID TAB
+local HumanoidTAB = Window:NewTab("Humanoid")
+local HumanoidSECTION = HumanoidTAB:NewSection("HUMANOID/SPEED")
+HumanoidSECTION:NewButton("Sit", "Makes you sit", function()
+    game.Players.LocalPlayer.Character.Humanoid.Sit = true
+end)
+
+HumanoidSECTION:NewToggle("Super-Human", "Credits: 1-f0 makes yourself a superhuman!!!!", function(state)
+    if state then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 120
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 120
+    else
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+    end
+end)
+
+HumanoidSECTION:NewSlider("Walkspeed", "changes your walkspeed (Max: 500, Min: 16)", 500, 16, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+HumanoidSECTION:NewToggle("Super-Man", "Credits: 1-f0 makes yourself a superman!!!!", function(state)
+    if state then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 500
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 240
+        game.Players.LocalPlayer.Character.Humanoid.Sit = true
+    else
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+    end
+end)
+
+-- SCRIPTS TAB
+local ScriptsTAB = Window:NewTab("Scripts")
+local ScriptsSECTION = ScriptsTAB:NewSection("Scripts:")
+ScriptsSECTION:NewButton("Infinite Yield", "Loads Infinite Yield", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+ScriptsSECTION:NewButton("Get 80m cash (HOTEL ELEPHANT)", "Gives you 80m cash!", function()
+    local args = {
+        [1] = false,
+        [2] = 8000000000000000000,
+        [3] = "Cash",
+        [4] = game:GetService("Players").LocalPlayer
+    }
+
+    game:GetService("ReplicatedStorage").MoneyRequest:FireServer(unpack(args))
+end)
+
+-- Fling Things and People TAB
+local FlingThingsAndPeople = Window:NewTab("Fling things and people")
+
+local MyMainSecFling = FlingThingsAndPeople:NewSection("Mine")
+
+MyMainSecFling:NewSlider("Strength", "Strength power", 100000, 100, function(s)
+    local bodyvel_Name = "FlingVelocity"
+    local userinputs = game:GetService("UserInputService")
+    local w = game:GetService("Workspace")
+    local d = game:GetService("Debris")
+
+ strength = s
+
+    w.ChildAdded:Connect(function(model)
+        if model.Name == "GrabParts" then
+            local part_to_impulse = model["GrabPart"]["WeldConstraint"].Part1
+
+            if part_to_impulse then
+                print("Part found!")
+
+                local velocityObj = Instance.new("BodyVelocity", part_to_impulse)
+
+                model:GetPropertyChangedSignal("Parent"):Connect(function()
+                    if not model.Parent then
+                        if userinputs:GetLastInputType() == Enum.UserInputType.MouseButton2 then
+                            print("Launched!")
+                            velocityObj.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+                            velocityObj.Velocity = workspace.CurrentCamera.CFrame.lookVector * strength
+                            d:AddItem(velocityObj, 1)
+                        elseif userinputs:GetLastInputType() == Enum.UserInputType.MouseButton1 then
+                            velocityObj:Destroy()
+                            print("Cancel Launch!")
+                        else
+                            velocityObj:Destroy()
+                            print("No two keys pressed!")
+                        end
+                    end
+                end)
+            end
+        end
+    end)
+end)
+
+MyMainSecFling:NewButton("Delete (Objects only)", "click and rightclick on a object to del it.", function()
+strength = 100000
+end)
+
+
+
+local OthersSectionFling = FlingThingsAndPeople:NewSection("Others")
+
+OthersSectionFling:NewButton("Fling things and people script", "Orion Hub version (not mine)", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/BlizTBr/scripts/main/FTAP.lua"))()
+end)
+
+local FETAB = Window:NewTab("FE")
+local mainSectionFe = FETAB:NewSection("IN BETA BUT HERES A SCRIPT (FE)")
+full 
+mainSectionFe:NewButton("Psy Hub", "A hub ", function()
+    loadstring(game:GetObjects("rbxassetid://3014051754")[1].Source)()
+end)
+
+
